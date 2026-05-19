@@ -1,0 +1,36 @@
+---
+- name: Install Docker CE on RHEL/Oracle Linux only
+  hosts: cloud_servers
+  become: yes
+
+  tasks:
+    # --- REDHAT / ORACLE LINUX DOCKER INSTALLATION ---
+    - name: Install yum-utils (repository management tools)
+      ansible.builtin.dnf:
+        name: yum-utils
+        state: present
+      when: ansible_os_family == "RedHat"
+
+    - name: Add official Docker CE repository
+      ansible.builtin.get_url:
+        url: https://download.docker.com/linux/centos/docker-ce.repo
+        dest: /etc/yum.repos.d/docker-ce.repo
+        mode: '0644'
+      when: ansible_os_family == "RedHat"
+
+    - name: Install Docker CE packages
+      ansible.builtin.dnf:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-compose-plugin
+        state: latest
+      when: ansible_os_family == "RedHat"
+
+    - name: Ensure Docker service is started and enabled
+      ansible.builtin.systemd:
+        name: docker
+        state: started
+        enabled: yes
+      when: ansible_os_family == "RedHat"

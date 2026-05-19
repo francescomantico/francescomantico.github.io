@@ -1,0 +1,23 @@
+---
+- name: Complete cloud servers update
+  hosts: cloud_servers
+  become: yes
+
+  tasks:
+    # --- DEBIAN/UBUNTU TASKS ---
+    - name: Update apt package cache (Ubuntu)
+      ansible.builtin.apt:
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+
+    - name: Upgrade all packages (Ubuntu)
+      ansible.builtin.apt:
+        upgrade: dist
+      when: ansible_os_family == "Debian"
+
+    # --- REDHAT/RHEL/ORACLE LINUX TASKS ---
+    - name: Upgrade all packages (RHEL/Oracle Linux)
+      ansible.builtin.dnf:
+        name: "*"
+        state: latest
+      when: ansible_os_family == "RedHat"

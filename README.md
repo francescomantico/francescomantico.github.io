@@ -27,4 +27,4 @@ cp /mnt/c/Users/franc/Desktop/ubuntu_folder/ssh-key-2026-05-17.key ~/.ssh/oracle
 cp /mnt/c/Users/franc/Desktop/rhel_folder/ssh-key-2026-05-18.key ~/.ssh/rhel_key
 
 chmod 600 ~/.ssh/oracle_key
-chmod 600 ~/.ssh/rhel_key```
+chmod 600 ~/.ssh/rhel_key

@@ -22,9 +22,10 @@ Dato che Oracle Cloud genera chiavi SSH diverse per ogni istanza se non vengono 
 #### 1. Spostare e proteggere le chiavi in WSL
 Ho copiato i file .key scaricati dal Desktop di Windows alla cartella home di WSL e ho ristretto i permessi di lettura, passaggio obbligatorio altrimenti OpenSSH rifiuta la connessione.
 
-```bash
+# Spostamento delle chiavi da Windows a WSL
 cp /mnt/c/Users/franc/Desktop/ubuntu_folder/ssh-key-2026-05-17.key ~/.ssh/oracle_key
 cp /mnt/c/Users/franc/Desktop/rhel_folder/ssh-key-2026-05-18.key ~/.ssh/rhel_key
 
+# Configurazione dei permessi restrittivi (obbligatorio per OpenSSH)
 chmod 600 ~/.ssh/oracle_key
 chmod 600 ~/.ssh/rhel_key
